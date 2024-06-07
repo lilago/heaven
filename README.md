@@ -1,4 +1,4 @@
-# MedioAI: Enhance Udio (Unofficial)
+# OMG 100x THXXL to MedioAI for Enhancing Udio Unofficially 💋♥️
 
 ### Transform your Udio experience. Chrome Extension for Desktop.
 
