@@ -15,11 +15,10 @@ const app = {
       if (settings) {
         document.getElementById('notification').value = settings.notification
         document.getElementById('notificationsound').value = settings.notificationsound
+        document.getElementById('openaiapikey_voice').value = settings.openaiapikey_voice || ''
         document.getElementById('slideanimation').value = settings.slideanimation
         document.getElementById('lyrictextsize').value = settings.lyrictextsize
         document.getElementById('commandcolor').value = settings.commandcolor
-        document.getElementById('keepAdvancedSettings').value = settings.keepAdvancedSettings || 'off'
-        document.getElementById('manualModeDefault').value = settings.manualModeDefault || 'off'
         document.getElementById('aimodel').value = settings.aimodel || 'openai'
         document.getElementById('openaikey').value = settings.openaikey
         document.getElementById('autoSaveCovers').value = settings.autoSaveCovers || 'off'
@@ -269,14 +268,13 @@ const app = {
     const medioaiSettings = {
       notification: document.getElementById('notification').value,
       notificationsound: document.getElementById('notificationsound').value,
+      openaiapikey_voice: document.getElementById('openaiapikey_voice').value,
       slideanimation: document.getElementById('slideanimation').value,
       commandcolor: document.getElementById('commandcolor').value,
       lyrictextsize: document.getElementById('lyrictextsize').value,
       aimodel: document.getElementById('aimodel').value,
       openaikey: document.getElementById('openaikey').value,
       openrouterapikey: document.getElementById('openrouterapikey').value,
-      keepAdvancedSettings: document.getElementById('keepAdvancedSettings').value,
-      manualModeDefault: document.getElementById('manualModeDefault').value,
       autoSaveCovers: document.getElementById('autoSaveCovers').value,
       lyricAttribution: document.getElementById('lyricAttribution').value,
       openaiModal: document.getElementById('openaiModal').value,

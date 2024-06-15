@@ -53,16 +53,31 @@ Visit the website, [MedioAI.com](https://www.medioai.com) for more information.
 
 Go to [Chrome Web Store](https://chromewebstore.google.com/detail/me-dio/gkajdljokjallnlfkibjoiolndccinoi) to install the **MedioAI** extension and start using today!
 
+## Install on Microsoft Edge
+
+Go to [Microsoft Edge Store](https://microsoftedge.microsoft.com/addons/detail/medioai-enhance-udio/lbiepnaolpfacabhmcibjhmgmfaobppa) to install the **MedioAI** extension and start using today!
+
+## Install on Firefox, Opera, Safari
+
+Coming soon.
+
 ## Releases
 
+- **Version 1.4** - In development.
 - **Version 1.2** - [MedioAI v1.2 (just more tags)](https://github.com/WynterJones/MedioAI-for-Udio/releases/tag/v1.2)
 - **Version 1.1** - [MedioAI v1.1](https://github.com/WynterJones/MedioAI-for-Udio/releases/tag/v1.1)
 
-### Coming Soon
+### Version 1.4
+
+- MedioRadio! Listen to Udio like a radio station. Add OpenAI key for DJ announcer for tracks!
+- Fix: Track credit counter.
+- Fix: Save cover button duplicating
+- Fix: Track cover not downloading.
+- Removed "Manual Mode + Keep Settings" as Udio has updated.
+
+### In Development
 
 - Music visualizer to MP4
-- Firefox
-- Edge
 
 ### Bugs
 

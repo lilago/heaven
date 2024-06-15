@@ -50,20 +50,6 @@ const songStudioMedioAI = {
       songStudioMedioAI.seedBox()
     }, 2000)
 
-    const keepAdvancedSettings = await utilitiesMedioAI.getSettings('keepAdvancedSettings')
-    if (keepAdvancedSettings === 'on') {
-      setTimeout(() => {
-        songStudioMedioAI.keepAdvancedSettings()
-      }, 2000)
-    }
-
-    const defaultManualMode = await utilitiesMedioAI.getSettings('manualModeDefault')
-    if (defaultManualMode === 'on') {
-      setTimeout(() => {
-        songStudioMedioAI.toggleManualMode()
-      }, 2000)
-    }
-
     setTimeout(() => {
       songStudioMedioAI.trackCovers()
     }, 2000)
@@ -451,6 +437,12 @@ const songStudioMedioAI = {
     medioaiChallenge.addEventListener('click', () => {
       songStudioMedioAI.challenge()
     })
+
+    const medioaiRadio = document.getElementById('medioaiRadio')
+    medioaiRadio.addEventListener('click', () => {
+      songStudioMedioAI.close()
+      document.querySelector('#medio-radio').style.display = 'block'
+    })
   },
 
   challenge: async () => {
@@ -597,36 +589,6 @@ const songStudioMedioAI = {
 
     const observer = new MutationObserver(callback)
     observer.observe(document, { childList: true, subtree: true })
-  },
-
-  keepAdvancedSettings: () => {
-    const buttons = document.querySelectorAll('button')
-    buttons.forEach(button => {
-      if (button.textContent === 'Advanced Features') {
-        button.addEventListener('click', () => {
-          setTimeout(() => {
-            songStudioMedioAI.applyAdvancedSettings(button)
-          }, 500)
-        })
-      } else if (
-        button.textContent === 'Create' ||
-        button.textContent === 'Extend' ||
-        button.textContent === 'Remix'
-      ) {
-        button.addEventListener('click', () => {
-          const buttons = document.querySelectorAll('button')
-          buttons.forEach(button => {
-            if (button.textContent === 'Advanced Features') {
-              const wrapper = button.closest('h3').nextElementSibling
-              const allInputs = wrapper.querySelectorAll('input')
-              if (!allInputs[0]) return
-
-              songStudioMedioAI.setAdvancedSettings({ seed: allInputs[0].value, quality: allInputs[1].value })
-            }
-          })
-        })
-      }
-    })
   },
 
   applyAdvancedSettings: async button => {
@@ -896,13 +858,6 @@ const songStudioMedioAI = {
     })
   },
 
-  toggleManualMode: () => {
-    const button = document.querySelector('#bypass-settings')
-    if (button) {
-      songStudioMedioAI.simulateMouseClick(button)
-    }
-  },
-
   trackCovers: () => {
     const targetNode = document.body
     const config = { attributes: true, childList: true, subtree: true }
@@ -943,20 +898,22 @@ const songStudioMedioAI = {
                 songStudioMedioAI.grabCovers(wrapper, node)
               }
 
-              const saveImagesButton = document.createElement('button')
-              saveImagesButton.innerHTML = 'Save Covers'
-              saveImagesButton.setAttribute(
-                'class',
-                'items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-sm h-10 px-4 py-2 mr-3 block'
-              )
-              saveImagesButton.id = 'medioaiSaveCovers'
-              saveImagesButton.addEventListener('click', e => {
-                e.preventDefault()
-                e.stopPropagation()
+              if (!document.querySelector('#medioaiSaveCovers')) {
+                const saveImagesButton = document.createElement('button')
+                saveImagesButton.innerHTML = 'Save Covers'
+                saveImagesButton.setAttribute(
+                  'class',
+                  'items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-sm h-10 px-4 py-2 mr-3 block'
+                )
+                saveImagesButton.id = 'medioaiSaveCovers'
+                saveImagesButton.addEventListener('click', e => {
+                  e.preventDefault()
+                  e.stopPropagation()
 
-                songStudioMedioAI.grabCovers(wrapper, node)
-              })
-              generateButton.parentElement.appendChild(saveImagesButton)
+                  songStudioMedioAI.grabCovers(wrapper, node)
+                })
+                generateButton.parentElement.appendChild(saveImagesButton)
+              }
             }
           })
         }
@@ -1030,7 +987,7 @@ const songStudioMedioAI = {
       const covers = result.medioAICovers || []
       covers.unshift(...images)
       chrome.storage.local.set({ medioAICovers: covers }, function () {
-        utilitiesMedioAI.showNotification('Auto saved 3 covers.')
+        utilitiesMedioAI.showNotification('Saved track (3) covers.')
       })
     })
   },
